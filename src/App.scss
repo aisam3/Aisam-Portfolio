@@ -1,0 +1,472 @@
+/* ================= GLOBAL ================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Rajdhani:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  color: white;
+}
+
+/* Background video */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.video-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: -1;
+}
+
+/* ================= LAYOUT ================= */
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* Sidebar Desktop */
+.Sidebar {
+  width: 340px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.sidebar-con {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 30px;
+  backdrop-filter: blur(10px);
+}
+
+/* Content area */
+.content {
+  flex: 1;
+  margin-left: 340px;
+  padding: 60px 30px;
+}
+
+/* Section spacing */
+.Hero,
+.About,
+.Skills,
+.Portfolio,
+.Resume,
+.Contact {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 20px;
+}
+
+/* ================= SIDEBAR ================= */
+
+.portimage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+}
+
+.portimage img {
+  width: 160px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 15px;
+  display: block;
+}
+
+
+.Name {
+  text-align: center;
+}
+
+.Name .p1 {
+  font-family: "Dancing Script", cursive;
+  font-size: 50px;
+}
+
+.Name .p2 {
+  font-family: "Rajdhani", sans-serif;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.social-icons {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.social-icons a {
+  display: inline-flex;
+  width: 35px;
+  height: 35px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 5px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.started {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.started {
+  margin-top: 5px;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.started a {
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-family: "Rajdhani", sans-serif;
+}
+
+
+.social-icons a:hover {
+  background: #c77dff;
+}
+
+/* ================= NAVBAR ================= */
+
+.Navbar {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  position: sticky;
+  top: 20px;
+  margin-bottom: 50px;
+  padding: 10px 20px;
+  backdrop-filter: blur(6px);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.Navbar a {
+  text-decoration: none;
+  color: white;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.Navbar a:hover {
+  color: #c77dff;
+}
+
+/* ================= HERO ================= */
+
+.Hero h1,
+.Hero h2 {
+  font-size: 55px;
+}
+
+.highlight {
+  color: #c77dff;
+}
+
+.Hero p {
+  max-width: 600px;
+  margin-top: 20px;
+  font-size: 18px;
+}
+
+/* ================= ABOUT ================= */
+
+.About h1 {
+  color: #c77dff;
+  margin-bottom: 20px;
+}
+
+.About p {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+/* ================= SKILLS ================= */
+
+.Skills h1 {
+  color: #c77dff;
+  margin-bottom: 30px;
+}
+
+.skills-img {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.icon {
+  text-align: center;
+}
+
+.icon-bg {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
+}
+
+.icon-bg img {
+  width: 50%;
+}
+
+.icon-bg:hover {
+  transform: scale(1.1);
+}
+
+.icon p {
+  margin-top: 10px;
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* ================= PORTFOLIO ================= */
+
+.Portfolio h1 {
+  color: #c77dff;
+  margin-bottom: 30px;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.card {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.card img {
+  width: 40%;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 20px;
+  width: 60%;
+}
+
+.card-content h3 {
+  margin-bottom: 10px;
+}
+
+.card-content p {
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 8px 15px;
+  background: #c77dff;
+  border-radius: 6px;
+  color: white;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #6200b3;
+}
+
+/* ================= RESUME ================= */
+
+.Resume h1 {
+  color: #c77dff;
+  margin-bottom: 30px;
+}
+
+.resume-tile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.resume-btn {
+  padding: 10px 18px;
+  background: #c77dff;
+  border-radius: 6px;
+  text-decoration: none;
+  color: white;
+}
+
+/* ================= CONTACT ================= */
+
+.Contact h1 {
+  color: #c77dff;
+  margin-bottom: 30px;
+}
+
+.form-card {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;          
+  flex-wrap: wrap;      
+  margin-bottom: 20px; 
+}
+
+.form-row input {
+  flex: 1;                 
+  padding: 12px 15px;      
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: "Rajdhani", sans-serif;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-row input:focus {
+  border-color: #c77dff;      
+}
+
+
+input,
+textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+}
+
+button {
+  padding: 12px;
+  background: #c77dff;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+
+  .app {
+    flex-direction: column;
+  }
+
+  .Sidebar {
+    position: relative;
+    width: 100%;
+    height: auto;
+  }
+
+  .content {
+    margin-left: 0;
+  }
+
+  .Hero {
+    text-align: center;
+  }
+
+  .Hero h1,
+  .Hero h2 {
+    font-size: 40px;
+  }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    flex-direction: column;
+  }
+
+  .card img {
+    width: 100%;
+    height: 200px;
+  }
+
+  .card-content {
+    width: 100%;
+    text-align: center;
+  }
+
+  .resume-tile {
+    flex-direction: column;
+    gap: 15px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  .Hero h1,
+  .Hero h2 {
+    font-size: 28px;
+  }
+
+  .Navbar {
+    display: none;
+  }
+
+  .Name .p1 {
+    font-size: 38px;
+  }
+
+  .icon-bg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .portfolio-grid {
+    gap: 15px;
+  }
+}
