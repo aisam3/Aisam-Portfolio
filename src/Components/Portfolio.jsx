@@ -7,25 +7,27 @@ const Portfolio = () => {
       <div className="portfolio-grid">
         
         <div className="card">
-          <img src="/Assets/portfolio1.png" alt="Project Image" />
+          <img src="/Assets/portfolio1.png" alt="Project" />
           <div className="card-content">
             <h3>Global IT Solution</h3>
             <p>Global IT Solution is a modern React-based portfolio website showcasing innovative digital services and IT expertise.</p>
-            <a href="https://global-it-nine.vercel.app" target="_blank" className="btn">View</a>
+            <a href="https://global-it-nine.vercel.app" target="_blank" rel="noreferrer"
+ className="btn">View</a>
           </div>
         </div>
 
         <div className="card">
-          <img src="/Assets/crud.png" alt="Project Image" />
+          <img src="/Assets/crud.png" alt="Project" />
           <div className="card-content">
             <h3>CRUD App</h3>
             <p>A simple CRUD application with Firebase integration to create, read, update, and delete data in real-time.</p>
-            <a href="https://crud-chi-inky.vercel.app" target="_blank" className="btn">View</a>
+            <a href="https://crud-chi-inky.vercel.app" target="_blank" rel="noreferrer"
+ className="btn">View</a>
           </div>
         </div>
 
         <div className="card">
-          <img src="your-image.jpg" alt="Project Image" />
+          <img src="your-image.jpg" alt="Project" />
           <div className="card-content">
             <h3>Project Title</h3>
             <p>Short description about the project goes here. Keep it brief and clear.</p>
@@ -34,7 +36,7 @@ const Portfolio = () => {
         </div>
 
         <div className="card">
-          <img src="your-image.jpg" alt="Project Image" />
+          <img src="your-image.jpg" alt="Project" />
           <div className="card-content">
             <h3>Project Title</h3>
             <p>Short description about the project goes here. Keep it brief and clear.</p>

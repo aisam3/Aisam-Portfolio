@@ -2,7 +2,6 @@ import React from "react";
 import { CiFaceSmile } from "react-icons/ci";
 import { FaLinkedin } from "react-icons/fa";
 import { IoMdMail } from "react-icons/io";
-import { BsArrowUpRightCircleFill } from "react-icons/bs";
 import { SiGmail } from "react-icons/si";
 import { FaPhone } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
