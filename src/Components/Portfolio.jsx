@@ -31,7 +31,7 @@ const Portfolio = () => {
           <div className="card-content">
             <h3>Project Title</h3>
             <p>Short description about the project goes here. Keep it brief and clear.</p>
-            <a href="#" className="btn">View</a>
+            <a href="/" className="btn">View</a>
           </div>
         </div>
 
@@ -40,7 +40,7 @@ const Portfolio = () => {
           <div className="card-content">
             <h3>Project Title</h3>
             <p>Short description about the project goes here. Keep it brief and clear.</p>
-            <a href="#" className="btn">View</a>
+            <a href="/" className="btn">View</a>
           </div>
         </div>
 
