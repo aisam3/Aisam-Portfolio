@@ -6,6 +6,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 const projects = [
   {
+    title: "Titon — Lead Management Platform",
+    description: "Developed and maintained a full-stack web application with lead management, advanced filtering, pagination, and user profile management features. Integrated Supabase for database management and cloud data storage, enabling secure and scalable handling of customer and business data. Enhanced application performance, fixed critical bugs, optimized user experience, and deployed the solution to a production environment.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
+    link: "https://titon-iota.vercel.app/",
+    tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Prisma", "Tailwind CSS"]
+  },
+  {
     title: "Global IT Solution",
     description: "A modern React-based portfolio website showcasing innovative digital services and IT expertise with a focus on cutting-edge design.",
     image: "/Assets/portfolio1.png",
