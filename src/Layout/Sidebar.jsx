@@ -42,7 +42,7 @@ const Sidebar = () => {
           </a>
         </div>
         <a className="started" href="#contact">
-          <a href="/">Contact Me</a>
+          Contact Me
         </a>
       </div>
     </aside>

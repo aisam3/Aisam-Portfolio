@@ -1,61 +1,31 @@
 import React from "react";
 
+const skillsData = [
+  { name: "HTML5", src: "/Assets/html.png" },
+  { name: "CSS3", src: "/Assets/css.png" },
+  { name: "Tailwind CSS", src: "/Assets/tailwind.png" },
+  { name: "JavaScript", src: "/Assets/javascript.png" },
+  { name: "React JS", src: "/Assets/react.png" },
+  { name: "GitHub", src: "/Assets/github.png", invert: true },
+  { name: "Bootstrap", src: "/Assets/bootstrap.png" },
+];
+
 const Skills = () => {
   return (
     <div className="Skills" id="skills">
       <h1>Skills</h1>
 
-      <div className="skills-img skills-top">
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/html.png" alt="HTML" />
+      <div className="skills-scatter">
+        {skillsData.map((skill, i) => (
+          <div className="skill-bubble" key={i}>
+            <img 
+              src={skill.src} 
+              alt={skill.name} 
+              style={skill.invert ? { filter: "invert(1) brightness(2)" } : {}} 
+            />
+            <span className="skill-name">{skill.name}</span>
           </div>
-          <p>HTML</p>
-        </div>
-
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/css.png" alt="CSS" />
-          </div>
-          <p>CSS</p>
-        </div>
-
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/tailwind.png" alt="Tailwind" />
-          </div>
-          <p>Tailwind</p>
-        </div>
-
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/javascript.png" alt="JavaScript" />
-          </div>
-          <p>JavaScript</p>
-        </div>
-      </div>
-
-      <div className="skills-img">
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/react.png" alt="React" />
-          </div>
-          <p>React</p>
-        </div>
-
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/github.png" alt="GitHub" />
-          </div>
-          <p>GitHub</p>
-        </div>
-
-        <div className="icon">
-          <div className="icon-bg">
-            <img src="/Assets/bootstrap.png" alt="Bootstrap" />
-          </div>
-          <p>Bootstrap</p>
-        </div>
+        ))}
       </div>
     </div>
   );
