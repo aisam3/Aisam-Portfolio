@@ -1,102 +1,188 @@
-import React, { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { LuArrowUpRight, LuImage, LuLoaderCircle } from "react-icons/lu";
+import SectionLabel from "./ui/SectionLabel";
+import { projects } from "../data";
+import { SplitChars, isTouch, prefersReducedMotion } from "../lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const projects = [
-  {
-    title: "Titon — Lead Management Platform",
-    description: "Developed and maintained a full-stack web application with lead management, advanced filtering, pagination, and user profile management features. Integrated Supabase for database management and cloud data storage, enabling secure and scalable handling of customer and business data. Enhanced application performance, fixed critical bugs, optimized user experience, and deployed the solution to a production environment.",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80",
-    link: "https://titon-iota.vercel.app/",
-    tags: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Prisma", "Tailwind CSS"]
-  },
-  {
-    title: "Global IT Solution",
-    description: "A modern React-based portfolio website showcasing innovative digital services and IT expertise with a focus on cutting-edge design.",
-    image: "/Assets/portfolio1.png",
-    link: "https://global-it-nine.vercel.app",
-    tags: ["React", "UI/UX", "Tailwind"]
-  },
-  {
-    title: "CRUD App Dashboard",
-    description: "A comprehensive CRUD application with Firebase integration to create, read, update, and delete data in real-time.",
-    image: "/Assets/crud.png",
-    link: "https://crud-chi-inky.vercel.app",
-    tags: ["React", "Firebase", "Dashboard"]
-  },
-  {
-    title: "E-Commerce Platform",
-    description: "A robust e-commerce dashboard with detailed data visualization, user management, and seamless real-time sales tracking features.",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=800&q=80",
-    link: "#",
-    tags: ["E-Commerce", "Admin", "Analytics"]
-  },
-  {
-    title: "Social Media App",
-    description: "A highly scalable social networking application featuring live chat, posts, likes, and a rich interactive user interface.",
-    image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-    link: "#",
-    tags: ["Social", "Real-time", "Chat"]
-  }
-];
+const pad = (n) => String(n).padStart(2, "0");
 
 const Portfolio = () => {
-  const containerRef = useRef(null);
-  const cardsRef = useRef([]);
+  const root = useRef(null);
+  const popup = useRef(null);
+  const [active, setActive] = useState(null); // index of tile whose preview is showing
+  const [touch] = useState(isTouch);
 
+  // Entrance animations.
   useEffect(() => {
-    let ctx = gsap.context(() => {
-      cardsRef.current.forEach((card, i) => {
-        if (i === projects.length - 1) return; // Last card doesn't need to scale down
-        const nextCard = cardsRef.current[i + 1];
-
-        // Scale and fade out the current card as the next one scrolls up to cover it
-        gsap.to(card, {
-          scale: 0.92,
-          opacity: 0.6,
-          scrollTrigger: {
-            trigger: nextCard,
-            start: "top bottom",     // when next card hits the bottom of the viewport
-            end: "top 20%",          // until next card is near its sticky position
-            scrub: true,
-          }
-        });
+    if (prefersReducedMotion()) return;
+    const ctx = gsap.context(() => {
+      gsap.from(".work__title .char", {
+        yPercent: 110,
+        stagger: 0.025,
+        duration: 1.1,
+        ease: "expo.out",
+        scrollTrigger: { trigger: ".work__title", start: "top 85%" },
       });
-    }, containerRef);
-
-    return () => ctx.revert(); // clean up context
+      // Explicit from/to values plus transition:none while tweening, so the tiles' CSS hover
+      // transitions can't be read back as the animation's end state.
+      const tiles = gsap.utils.toArray(".ptile");
+      gsap.set(tiles, { transition: "none" });
+      gsap.fromTo(
+        tiles,
+        { y: 60, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1,
+          ease: "expo.out",
+          stagger: 0.08,
+          scrollTrigger: { trigger: ".work__grid", start: "top 85%" },
+          onComplete: () => gsap.set(tiles, { clearProps: "transition,transform,opacity" }),
+        }
+      );
+    }, root);
+    return () => ctx.revert();
   }, []);
 
+  // Desktop: one small floating preview that trails the cursor across the grid.
+  useEffect(() => {
+    const el = popup.current;
+    if (!el || touch) return;
+    const grid = root.current.querySelector(".work__grid");
+    const xTo = gsap.quickTo(el, "x", { duration: 0.5, ease: "power3" });
+    const yTo = gsap.quickTo(el, "y", { duration: 0.5, ease: "power3" });
+    const rTo = gsap.quickTo(el, "rotate", { duration: 0.6, ease: "power3" });
+    let lastX = 0;
+    // Keep the pop-up fully on screen: it sits up-right of the cursor, and flips to the
+    // cursor's left when there isn't room on the right.
+    const clampX = (x) => (x + el.offsetWidth + 60 > window.innerWidth ? x - el.offsetWidth - 56 : x);
+    const clampY = (y) => Math.max(y, el.offsetHeight + 40);
+
+    const enter = (e) => {
+      gsap.set(el, { x: clampX(e.clientX), y: clampY(e.clientY) });
+      lastX = e.clientX;
+    };
+    const move = (e) => {
+      xTo(clampX(e.clientX));
+      yTo(clampY(e.clientY));
+      rTo(gsap.utils.clamp(-10, 10, (e.clientX - lastX) * 0.5));
+      lastX = e.clientX;
+    };
+    grid.addEventListener("mouseenter", enter);
+    grid.addEventListener("mousemove", move);
+    return () => {
+      grid.removeEventListener("mouseenter", enter);
+      grid.removeEventListener("mousemove", move);
+    };
+  }, [touch]);
+
+  useEffect(() => {
+    if (!popup.current || touch) return;
+    gsap.to(popup.current, {
+      scale: active === null ? 0.4 : 1,
+      opacity: active === null ? 0 : 1,
+      duration: 0.45,
+      ease: active === null ? "power3.out" : "back.out(1.7)",
+    });
+  }, [active, touch]);
+
   return (
-    <div className="Portfolio" id="portfolio" ref={containerRef}>
-      <h1>Portfolio</h1>
-      <div className="stacking-grid">
-        {projects.map((project, index) => (
-          <div
-            className="stack-card"
-            key={index}
-            ref={(el) => cardsRef.current[index] = el}
-            style={{ zIndex: index + 1 }}
-          >
-            <img src={project.image} alt={project.title} />
-            <div className="stack-content">
-              <h3>{project.title}</h3>
-              <p>{project.description}</p>
-              <div className="stack-tags">
-                {project.tags.map((tag, idx) => (
-                  <span key={idx} className="stack-tag">{tag}</span>
-                ))}
+    <section className="section work" id="work" ref={root}>
+      <SectionLabel index="03" title="Selected work" aside={`${pad(projects.length)} projects`} />
+      <h2 className="display work__title" aria-label="Featured projects">
+        <span className="line">
+          <SplitChars text="Featured" />
+        </span>
+        <span className="line line--right">
+          <em className="serif">
+            <SplitChars text="projects" />
+          </em>
+          <sup className="work__count">({projects.length})</sup>
+        </span>
+      </h2>
+
+      <ul className="work__grid" onMouseLeave={() => setActive(null)}>
+        {projects.map((p, i) => {
+          const live = Boolean(p.link);
+          const isActive = active === i;
+          return (
+            <li
+              key={p.title}
+              className={`ptile ${isActive ? "is-active" : ""} ${active !== null && !isActive && !touch ? "is-dim" : ""}`}
+              onMouseEnter={() => !touch && setActive(i)}
+              onFocus={() => !touch && setActive(i)}
+              data-cursor-label={live ? "Visit ↗" : "Soon"}
+            >
+              <div className="ptile__top">
+                <span className="ptile__index">{pad(i + 1)}</span>
+                <span className={`ptile__status ${live ? "is-live" : ""}`}>
+                  {live ? <i className="pulse" /> : <LuLoaderCircle className="spin-slow" />}
+                  {live ? "Live" : "In progress"}
+                </span>
               </div>
-              <a href={project.link} target="_blank" rel="noreferrer" className="modern-btn">
-                View Project
-              </a>
-            </div>
+
+              <h3 className="ptile__title">
+                {live ? (
+                  <a href={p.link} target="_blank" rel="noreferrer" className="ptile__link">
+                    {p.title}
+                  </a>
+                ) : (
+                  p.title
+                )}
+                {p.badge && <span className="chip chip--accent">{p.badge}</span>}
+              </h3>
+              <p className="ptile__subtitle">{p.subtitle}</p>
+              <p className="ptile__desc">{p.description}</p>
+
+              <div className="ptile__foot">
+                <ul className="ptile__tags" aria-label="Tech used">
+                  {p.tags.map((t) => (
+                    <li key={t} className="tag">
+                      {t}
+                    </li>
+                  ))}
+                </ul>
+                <span className="ptile__arrow" aria-hidden="true">
+                  {live ? <LuArrowUpRight /> : <LuLoaderCircle />}
+                </span>
+              </div>
+
+              {/* Touch screens: tap the button to toggle a small preview inside the tile. */}
+              {touch && (
+                <>
+                  <button
+                    type="button"
+                    className="ptile__peek"
+                    onClick={() => setActive(isActive ? null : i)}
+                    aria-expanded={isActive}
+                    aria-label={`${isActive ? "Hide" : "Show"} ${p.title} preview`}
+                  >
+                    <LuImage />
+                  </button>
+                  <span className="ptile__thumb" aria-hidden={!isActive}>
+                    <img src={p.image} alt={`${p.title} preview`} loading="lazy" />
+                  </span>
+                </>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+
+      {!touch && (
+        <div className="work__popup" ref={popup} aria-hidden="true">
+          <div className="work__popup-track" style={{ transform: `translateY(-${(active ?? 0) * 100}%)` }}>
+            {projects.map((p) => (
+              <img key={p.title} src={p.image} alt="" />
+            ))}
           </div>
-        ))}
-      </div>
-    </div>
+        </div>
+      )}
+    </section>
   );
 };
 
