@@ -115,7 +115,7 @@ const Contact = () => {
 
   return (
     <section className="section contact" id="contact" ref={root}>
-      <SectionLabel index="05" title="Contact" />
+      <SectionLabel title="Contact" />
 
       <h2 className="contact__title" aria-label="Let's build something great together">
         <span className="line">

@@ -55,7 +55,7 @@ const Skills = () => {
 
   return (
     <section className="section skills" id="skills" ref={root}>
-      <SectionLabel index="02" title="Stack" aside={`${skills.length} tools`} />
+      <SectionLabel title="Stack" aside={`${skills.length} tools`} />
       <div className="skills__head">
         <h2 className="display skills__title" aria-label="Tools I build with">
           <span className="line">

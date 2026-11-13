@@ -8,8 +8,6 @@ import { SplitChars, isTouch, prefersReducedMotion } from "../lib/motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const pad = (n) => String(n).padStart(2, "0");
-
 const Portfolio = () => {
   const root = useRef(null);
   const popup = useRef(null);
@@ -92,7 +90,7 @@ const Portfolio = () => {
 
   return (
     <section className="section work" id="work" ref={root}>
-      <SectionLabel index="03" title="Selected work" aside={`${pad(projects.length)} projects`} />
+      <SectionLabel title="Selected work" />
       <h2 className="display work__title" aria-label="Featured projects">
         <span className="line">
           <SplitChars text="Featured" />
@@ -101,7 +99,6 @@ const Portfolio = () => {
           <em className="serif">
             <SplitChars text="projects" />
           </em>
-          <sup className="work__count">({projects.length})</sup>
         </span>
       </h2>
 
@@ -118,7 +115,6 @@ const Portfolio = () => {
               data-cursor-label={live ? "Visit ↗" : "Soon"}
             >
               <div className="ptile__top">
-                <span className="ptile__index">{pad(i + 1)}</span>
                 <span className={`ptile__status ${live ? "is-live" : ""}`}>
                   {live ? <i className="pulse" /> : <LuLoaderCircle className="spin-slow" />}
                   {live ? "Live" : "In progress"}

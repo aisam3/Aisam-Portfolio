@@ -106,7 +106,7 @@ const Header = () => {
         </a>
 
         <nav className="nav__links" aria-label="Primary">
-          {navLinks.map((l, i) => (
+          {navLinks.map((l) => (
             <a
               key={l.id}
               href={`#${l.id}`}
@@ -114,16 +114,15 @@ const Header = () => {
               className={active === l.id ? "is-active" : ""}
               aria-current={active === l.id ? "true" : undefined}
             >
-              <sup>0{i + 1}</sup>
               <RollText>{l.label}</RollText>
             </a>
           ))}
         </nav>
 
         <div className="nav__right">
-          <span className="nav__time" title="Local time in Lahore">
+          {/* <span className="nav__time" title="Local time in Lahore">
             <i className="pulse" /> LHR
-          </span>
+          </span> */}
           <Magnetic>
             <a href="#contact" onClick={go("contact")} className="btn btn--pill btn--light nav__cta">
               <RollText>Let's talk</RollText>

@@ -72,7 +72,7 @@ const About = () => {
 
   return (
     <section className="section about" id="about" ref={root}>
-      <SectionLabel index="01" title="About" />
+      <SectionLabel title="About" />
       <p className="about__statement">
         <SplitWords text={statement} />
       </p>

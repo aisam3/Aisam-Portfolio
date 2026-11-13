@@ -784,7 +784,7 @@ button:hover .roll::after {
     a {
       position: relative;
       display: inline-flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 0.25rem;
       padding: 0.5rem 1rem;
       border-radius: 999px;
@@ -1236,6 +1236,7 @@ button:hover .roll::after {
     display: grid;
     grid-template-columns: 1fr 1.4fr;
     gap: clamp(2rem, 5vw, 5rem);
+    align-items: stretch;
 
     @media (max-width: $bp-md) {
       grid-template-columns: 1fr;
@@ -1245,12 +1246,15 @@ button:hover .roll::after {
   &__stats {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
   }
 
   &__pillars {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
+    height: 100%;
 
     @media (max-width: $bp-md) {
       grid-template-columns: 1fr;
@@ -1259,10 +1263,11 @@ button:hover .roll::after {
 }
 
 .stat {
+  flex: 1;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   padding: 1.4rem 0;
   border-top: 1px solid var(--line);
 
@@ -1299,6 +1304,9 @@ button:hover .roll::after {
 
 .pillar {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   padding: 1.75rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -1560,7 +1568,7 @@ button:hover .roll::after {
 
   &__top {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     margin-bottom: 1.25rem;
     font-family: var(--mono);

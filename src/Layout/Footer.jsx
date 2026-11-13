@@ -82,7 +82,7 @@ const Footer = () => {
       </div>
 
       <div className="footer__bottom">
-        <span>© {new Date().getFullYear()} {profile.name}</span>
+        <span>.</span>
         <span>Designed &amp; built with care</span>
       </div>
     </footer>

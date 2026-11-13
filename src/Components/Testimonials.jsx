@@ -30,7 +30,7 @@ const Testimonials = () => {
 
   return (
     <section className="section testimonials" ref={root} aria-label="Testimonials">
-      <SectionLabel index="04" title="Kind words" />
+      <SectionLabel title="Kind words" />
       <div className="testimonials__list">
         {testimonials.map((t) => (
           <figure className="quote" key={t.author}>

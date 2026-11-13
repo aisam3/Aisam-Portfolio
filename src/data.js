@@ -23,7 +23,7 @@ export const profile = {
   email: "aisamabbas03@gmail.com",
   phone: "+92 346 7900942",
   phoneHref: "tel:+923467900942",
-  location: "Shamsabad, Rawalpindi",
+  location: "Lahore, Pakistan",
   timezone: "Asia/Karachi",
   linkedin: "https://www.linkedin.com/in/aisam-abbas/",
   resume: "/resume.pdf",
